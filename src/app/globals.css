@@ -160,13 +160,14 @@
 /* ================================
    COLUMN WIDTHS (Desktop)
    ================================ */
-.pred-table td.league { max-width: 120px; }
-.pred-table td.fixture {
+.pred-table th.league, .pred-table td.league { width: 120px; max-width: 120px; }
+.pred-table th.fixture, .pred-table td.fixture {
   min-width: 260px;
+  width: 320px;
   max-width: 340px;
 }
-.pred-table td.prediction { max-width: 140px; }
-.pred-table td.rec { max-width: 90px; }
+.pred-table th.prediction, .pred-table td.prediction { width: 140px; max-width: 140px; }
+.pred-table th.rec, .pred-table td.rec { width: 90px; max-width: 90px; }
 
 /* ================================
    MOBILE-FIRST CARD LAYOUT

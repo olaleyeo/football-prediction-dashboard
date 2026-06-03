@@ -21,10 +21,10 @@ export function PredictionTable({ predictions }: { predictions: PredictionResult
           <TableRow className="bg-slate-50 dark:bg-slate-900">
             <TableHead>Date</TableHead>
             <TableHead>Time</TableHead>
-            <TableHead>League</TableHead>
-            <TableHead>Fixture</TableHead>
-            <TableHead>Prediction</TableHead>
-            <TableHead className="text-center">Recommendation</TableHead>
+            <TableHead className="league">League</TableHead>
+            <TableHead className="fixture">Fixture</TableHead>
+            <TableHead className="prediction">Prediction</TableHead>
+            <TableHead className="text-center rec">Recommendation</TableHead>
             <TableHead className="text-right">BT</TableHead>
             <TableHead className="text-right">OI</TableHead>
             <TableHead className="text-right">Confidence</TableHead>
