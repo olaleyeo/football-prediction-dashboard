@@ -22,7 +22,7 @@ export function FilterBar({ filters, onFilterChange }: FilterBarProps) {
         onChange={(e) => onFilterChange("league", e.target.value)}
         className="w-full sm:w-[220px]"
       />
-      <Select value={filters.market} onValueChange={(val) => onFilterChange("market", val)}>
+      <Select value={filters.market} onValueChange={(val) => onFilterChange("market", val || "")}>
         <SelectTrigger className="w-full sm:w-[220px]">
           <SelectValue placeholder="Select Market" />
         </SelectTrigger>
