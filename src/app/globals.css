@@ -139,96 +139,96 @@
 }
 
 /* ================================
-   TABLE BASE
+   BASE TABLE (Desktop)
    ================================ */
 .pred-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
   font-size: 14px;
-  background: #ffffff;
 }
 
-/* ================================
-   HEADER
-   ================================ */
-.pred-table th {
-  background: #f4f6f8;
-  padding: 12px;
-  text-align: left;
-  font-weight: 700;
-  color: #333;
-  white-space: nowrap;
-  border-bottom: 2px solid #e0e0e0;
-}
-
-/* ================================
-   CELLS
-   ================================ */
+.pred-table th,
 .pred-table td {
   padding: 12px;
+  text-align: left;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-bottom: 1px solid #f0f0f0;
-  color: #222;
 }
 
 /* ================================
-   COLUMN WIDTHS
+   MOBILE-FIRST CARD LAYOUT
    ================================ */
-.pred-table td.league {
-  max-width: 120px;
-}
+@media (max-width: 700px) {
 
-.pred-table td.fixture {
-  min-width: 260px;
-  max-width: 340px;
-  white-space: normal;
-  word-wrap: break-word;
-}
+  /* Hide table header */
+  .pred-table thead {
+    display: none;
+  }
 
-.pred-table td.prediction {
-  max-width: 140px;
-}
+  /* Each row becomes a card */
+  .pred-table tr {
+    display: block;
+    background: #ffffff;
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
 
-.pred-table td.rec {
-  max-width: 90px;
+  /* Each cell becomes a row inside the card */
+  .pred-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    white-space: normal;
+  }
+
+  /* Remove last border */
+  .pred-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* Add labels using data-label */
+  .pred-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #555;
+  }
+
+  /* Fixture gets more space */
+  .pred-table td[data-label="Fixture"] {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  /* Prediction styling */
+  .pred-table td[data-label="Prediction"] {
+    font-weight: 600;
+  }
 }
 
 /* ================================
    PREDICTION ICONS
    ================================ */
 .pred-icon {
-  display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
+  display: inline-block;
   margin-right: 6px;
 }
 
-.pred-icon.over {
-  background: #1e90ff; /* blue */
-}
-
-.pred-icon.under {
-  background: #ff4757; /* red */
-}
-
-.pred-icon.home {
-  background: #28a745; /* green */
-}
-
-.pred-icon.away {
-  background: #ff9f1c; /* orange */
-}
-
-.pred-icon.draw {
-  background: #6c757d; /* grey */
-}
+.pred-icon.home { background: #28a745; }
+.pred-icon.away { background: #ff9f1c; }
+.pred-icon.draw { background: #6c757d; }
+.pred-icon.over { background: #1e90ff; }
+.pred-icon.under { background: #ff4757; }
 
 /* ================================
-   BADGES (Recommendation)
+   BADGES
    ================================ */
 .badge {
   padding: 4px 10px;
@@ -236,52 +236,9 @@
   font-size: 12px;
   font-weight: 600;
   color: white;
-  display: inline-block;
 }
 
-.badge.elite {
-  background: #28a745;
-}
-
-.badge.strong {
-  background: #007bff;
-}
-
-.badge.good {
-  background: #17a2b8;
-}
-
-.badge.pass {
-  background: #6c757d;
-}
-
-/* ================================
-   ROW HOVER EFFECT
-   ================================ */
-.pred-table tbody tr:hover {
-  background: #f9fbfc;
-}
-
-/* ================================
-   MOBILE RESPONSIVENESS
-   ================================ */
-@media (max-width: 600px) {
-
-  /* Hide League column on mobile */
-  .pred-table th:nth-child(3),
-  .pred-table td:nth-child(3) {
-    display: none;
-  }
-
-  /* Give Fixture more room */
-  td.fixture {
-    min-width: 240px;
-    max-width: 300px;
-  }
-
-  /* Slightly reduce padding */
-  .pred-table td,
-  .pred-table th {
-    padding: 10px;
-  }
-}
+.badge.elite { background: #28a745; }
+.badge.strong { background: #007bff; }
+.badge.good { background: #17a2b8; }
+.badge.pass { background: #6c757d; }

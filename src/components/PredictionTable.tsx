@@ -66,10 +66,10 @@ export function PredictionTable({ predictions }: { predictions: PredictionResult
 
               return (
                 <TableRow key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
-                  <TableCell className="whitespace-nowrap text-sm text-muted-foreground">
+                  <TableCell className="whitespace-nowrap text-sm text-muted-foreground" data-label="Date">
                     {format(matchDate, "MMM dd, yyyy")}
                   </TableCell>
-                  <TableCell className="whitespace-nowrap text-sm">
+                  <TableCell className="whitespace-nowrap text-sm" data-label="Time">
                     <div className="flex flex-col gap-1">
                       <span className="font-medium text-slate-700 dark:text-slate-300">{matchTime}</span>
                       {displayStatus && (
@@ -79,25 +79,25 @@ export function PredictionTable({ predictions }: { predictions: PredictionResult
                       )}
                     </div>
                   </TableCell>
-                <TableCell className="font-medium text-sm text-slate-600 dark:text-slate-300 league" title={p.league}>
+                <TableCell className="font-medium text-sm text-slate-600 dark:text-slate-300 league" title={p.league} data-label="League">
                   {p.league}
                 </TableCell>
-                <TableCell className="font-bold text-sm fixture" title={p.fixture}>{p.fixture}</TableCell>
-                <TableCell className="text-sm font-medium text-blue-600 dark:text-blue-400 prediction" title={p.prediction}>
+                <TableCell className="font-bold text-sm fixture" title={p.fixture} data-label="Fixture">{p.fixture}</TableCell>
+                <TableCell className="text-sm font-medium text-blue-600 dark:text-blue-400 prediction" title={p.prediction} data-label="Prediction">
                   {iconClass && <span className={`pred-icon ${iconClass}`}></span>}
                   {p.prediction}
                 </TableCell>
-                <TableCell className="text-center rec">
+                <TableCell className="text-center rec" data-label="Rec">
                   <span className={`badge ${p.recommendation?.toLowerCase() || "pass"}`}>
                     {p.recommendation || "PASS"}
                   </span>
                 </TableCell>
-                <TableCell className="text-right font-mono text-sm">{p.bt}</TableCell>
-                <TableCell className="text-right font-mono text-sm">{p.oi}</TableCell>
-                <TableCell className={`text-right ${getConfColor(p.confidence)}`}>
+                <TableCell className="text-right font-mono text-sm" data-label="BT">{p.bt}</TableCell>
+                <TableCell className="text-right font-mono text-sm" data-label="OI">{p.oi}</TableCell>
+                <TableCell className={`text-right ${getConfColor(p.confidence)}`} data-label="Confidence">
                   {p.confidence}%
                 </TableCell>
-                <TableCell className="text-right font-bold text-slate-700 dark:text-slate-200">
+                <TableCell className="text-right font-bold text-slate-700 dark:text-slate-200" data-label="Edge">
                   {(p.edge * 100).toFixed(1)}%
                 </TableCell>
               </TableRow>
