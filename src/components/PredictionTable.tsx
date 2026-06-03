@@ -21,10 +21,10 @@ export function PredictionTable({ predictions }: { predictions: PredictionResult
           <TableRow className="bg-slate-50 dark:bg-slate-900">
             <TableHead>Date</TableHead>
             <TableHead>Time</TableHead>
-            <TableHead className="league">League</TableHead>
-            <TableHead className="fixture">Fixture</TableHead>
-            <TableHead className="prediction">Prediction</TableHead>
-            <TableHead className="text-center rec">Recommendation</TableHead>
+            <TableHead className="w-[120px] league">League</TableHead>
+            <TableHead className="w-[320px] fixture">Fixture</TableHead>
+            <TableHead className="w-[140px] prediction">Prediction</TableHead>
+            <TableHead className="w-[90px] text-center rec">Recommendation</TableHead>
             <TableHead className="text-right">BT</TableHead>
             <TableHead className="text-right">OI</TableHead>
             <TableHead className="text-right">Confidence</TableHead>
@@ -79,15 +79,15 @@ export function PredictionTable({ predictions }: { predictions: PredictionResult
                       )}
                     </div>
                   </TableCell>
-                <TableCell className="font-medium text-sm text-slate-600 dark:text-slate-300 league" title={p.league} data-label="League">
+                <TableCell className="w-[120px] font-medium text-sm text-slate-600 dark:text-slate-300 league" title={p.league} data-label="League">
                   {p.league}
                 </TableCell>
-                <TableCell className="font-bold text-sm fixture" title={p.fixture} data-label="Fixture">{p.fixture}</TableCell>
-                <TableCell className="text-sm font-medium text-blue-600 dark:text-blue-400 prediction" title={p.prediction} data-label="Prediction">
+                <TableCell className="w-[320px] min-w-[320px] font-bold text-sm fixture" title={p.fixture} data-label="Fixture">{p.fixture}</TableCell>
+                <TableCell className="w-[140px] text-sm font-medium text-blue-600 dark:text-blue-400 prediction" title={p.prediction} data-label="Prediction">
                   {iconClass && <span className={`pred-icon ${iconClass}`}></span>}
                   {p.prediction}
                 </TableCell>
-                <TableCell className="text-center rec" data-label="Rec">
+                <TableCell className="w-[90px] text-center rec" data-label="Rec">
                   <span className={`badge ${p.recommendation?.toLowerCase() || "pass"}`}>
                     {p.recommendation || "PASS"}
                   </span>
