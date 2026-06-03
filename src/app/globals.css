@@ -143,6 +143,7 @@
    ================================ */
 .pred-table {
   width: 100%;
+  min-width: 900px; /* Prevents crushing on small desktops */
   border-collapse: collapse;
   table-layout: fixed;
   font-size: 14px;
@@ -160,14 +161,14 @@
 /* ================================
    COLUMN WIDTHS (Desktop)
    ================================ */
-.pred-table th.league, .pred-table td.league { width: 120px; max-width: 120px; }
+.pred-table th.league, .pred-table td.league { width: 120px !important; max-width: 120px !important; }
 .pred-table th.fixture, .pred-table td.fixture {
-  min-width: 260px;
-  width: 320px;
-  max-width: 340px;
+  min-width: 260px !important;
+  width: 320px !important;
+  max-width: 340px !important;
 }
-.pred-table th.prediction, .pred-table td.prediction { width: 140px; max-width: 140px; }
-.pred-table th.rec, .pred-table td.rec { width: 90px; max-width: 90px; }
+.pred-table th.prediction, .pred-table td.prediction { width: 140px !important; max-width: 140px !important; }
+.pred-table th.rec, .pred-table td.rec { width: 90px !important; max-width: 90px !important; }
 
 /* ================================
    MOBILE-FIRST CARD LAYOUT
