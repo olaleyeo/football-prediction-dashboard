@@ -1,44 +1,4 @@
-export interface APIMatch {
-  id: string;
-  fixture: string;
-  homeTeam: string;
-  awayTeam: string;
-  league: string;
-  date: Date;
-  status: string;
-  stats: {
-    GF_H: number;
-    GA_H: number;
-    GF_A: number;
-    GA_A: number;
-    BTTS_rate_H: number;
-    BTTS_rate_A: number;
-    League_avg_goals: number;
-    League_BTTS_rate: number;
-    League_avg_shots: number;
-    League_avg_corners: number;
-    League_avg_cards: number;
-    League_avg_fouls: number;
-    Form_H: number;
-    Form_A: number;
-    home_team_is_strong_at_home: boolean;
-    CornersFor_H: number;
-    CornersAgainst_H: number;
-    CornersFor_A: number;
-    CornersAgainst_A: number;
-    CardsFor_H: number;
-    CardsAgainst_H: number;
-    CardsFor_A: number;
-    CardsAgainst_A: number;
-    FoulsFor_H: number;
-    FoulsAgainst_H: number;
-    FoulsFor_A: number;
-    FoulsAgainst_A: number;
-    Referee_avg_cards: number;
-    Shots_H: number;
-    Shots_A: number;
-  };
-}
+import type { APIMatch } from "@/types/match";
 
 // Helper to convert form string like "WWDL" to a 0-1 index
 function calculateFormIndex(formStr: string): number {

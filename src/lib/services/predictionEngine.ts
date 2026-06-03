@@ -1,4 +1,4 @@
-import { APIMatch } from "./apiFootball";
+import type { APIMatch } from "@/types/match";
 import { APIOdds } from "./oddsApi";
 
 

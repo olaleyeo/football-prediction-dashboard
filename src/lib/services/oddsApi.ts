@@ -1,3 +1,5 @@
+import type { APIMatch } from "@/types/match";
+
 export interface APIOdds {
   matchId: string;
   marketType: string;
@@ -10,6 +12,11 @@ export interface APIOdds {
     under?: number;
     yes?: number;
     no?: number;
+    doubleChance?: {
+      "1X"?: number;
+      "X2"?: number;
+      "12"?: number;
+    };
   };
 }
 
