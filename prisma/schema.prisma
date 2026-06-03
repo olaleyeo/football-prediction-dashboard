@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Match {
+  id                String   @id @default(uuid())
+  externalMatchId   String   @unique @map("external_match_id")
+  fixture           String
+  homeTeam          String   @map("home_team")
+  awayTeam          String   @map("away_team")
+  league            String
+  date              DateTime
+  status            String
+  
+  markets           Market[]
+  predictions       Prediction[]
+  
+  @@map("matches")
+}
+
+model Market {
+  id          String @id @default(uuid())
+  matchId     String @map("match_id")
+  match       Match  @relation(fields: [matchId], references: [id])
+  marketType  String @map("market_type")
+  line        Float?
+  homeOdds    Float? @map("home_odds")
+  drawOdds    Float? @map("draw_odds")
+  awayOdds    Float? @map("away_odds")
+  overOdds    Float? @map("over_odds")
+  underOdds   Float? @map("under_odds")
+  
+  @@map("markets")
+}
+
+model Prediction {
+  id              String @id @default(uuid())
+  matchId         String @map("match_id")
+  match           Match  @relation(fields: [matchId], references: [id])
+  marketType      String @map("market_type")
+  prediction      String
+  htFt            String? @map("ht_ft")
+  predictedScore  String? @map("predicted_score")
+  recommendation  String
+  bt              Float
+  oi              Float
+  confidence      Float
+  edge            Float
+  createdAt       DateTime @default(now()) @map("created_at")
+  
+  @@map("predictions")
+}
