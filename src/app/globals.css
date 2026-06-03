@@ -143,9 +143,7 @@
    ================================ */
 .pred-table {
   width: 100%;
-  min-width: 900px; /* Prevents crushing on small desktops */
   border-collapse: collapse;
-  table-layout: fixed;
   font-size: 14px;
 }
 
