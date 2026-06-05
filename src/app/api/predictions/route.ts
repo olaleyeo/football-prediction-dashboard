@@ -24,8 +24,8 @@ export async function GET(request: Request) {
     }).filter(Boolean);
 
     return NextResponse.json(predictions);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in predictions API:", error);
-    return NextResponse.json({ error: "Failed to generate predictions" }, { status: 500 });
+    return NextResponse.json({ error: error.message || "Failed to generate predictions" }, { status: 500 });
   }
 }

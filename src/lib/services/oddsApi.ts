@@ -31,7 +31,7 @@ function isSameTeam(name1: string, name2: string): boolean {
 export async function fetchOdds(matches: APIMatch[], marketType: string): Promise<APIOdds[]> {
   const apiKey = process.env.ODDS_API_KEY;
   if (!apiKey || apiKey.includes("your_the_odds_api_key")) {
-    return getMockOdds(matches.map(m => m.id), marketType);
+    throw new Error("The-Odds-API key is missing or not configured.");
   }
 
   try {
@@ -77,30 +77,12 @@ export async function fetchOdds(matches: APIMatch[], marketType: string): Promis
         };
       }
 
-      return getMockOdds([match.id], marketType)[0];
+      return { matchId: match.id, marketType, odds: {} };
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("The-Odds-API Error:", error);
-    return getMockOdds(matches.map(m => m.id), marketType);
+    throw new Error(error.message || "Failed to fetch from The-Odds-API");
   }
 }
 
-function getMockOdds(matchIds: string[], marketType: string): APIOdds[] {
-  return matchIds.map(id => {
-    if (marketType === "OU") {
-      return { matchId: id, marketType, line: 2.5, odds: { over: 1.85, under: 1.95 } };
-    } else if (marketType === "1X2") {
-      return { matchId: id, marketType, odds: { home: 2.1, draw: 3.4, away: 3.5 } };
-    } else if (marketType === "DC") {
-      return { matchId: id, marketType, odds: { home: 1.3, draw: 1.5, away: 1.7 } };
-    } else if (marketType === "BTTS") {
-      return { matchId: id, marketType, odds: { yes: 1.7, no: 2.1 } };
-    } else if (marketType === "Corners_Combined") {
-      return { matchId: id, marketType, line: 7.5, odds: { over: 1.9, under: 1.9 } };
-    } else if (marketType === "Cards") {
-      return { matchId: id, marketType, line: 4.5, odds: { over: 2.0, under: 1.8 } };
-    }
-    return { matchId: id, marketType, odds: {} };
-  });
-}

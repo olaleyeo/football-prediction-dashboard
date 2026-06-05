@@ -14,7 +14,7 @@ function calculateFormIndex(formStr: string): number {
 export async function fetchFixtures(date: string, leagueNameFilter: string): Promise<APIMatch[]> {
   const apiKey = process.env.API_FOOTBALL_KEY;
   if (!apiKey || apiKey.includes("your_api_football_key")) {
-    return getMockFixtures(date, leagueNameFilter);
+    throw new Error("API-Football key is missing or not configured.");
   }
 
   try {
@@ -26,6 +26,12 @@ export async function fetchFixtures(date: string, leagueNameFilter: string): Pro
     if (!res.ok) throw new Error("Failed to fetch fixtures from API-Football");
     
     const data = await res.json();
+    
+    if (data.errors && Object.keys(data.errors).length > 0) {
+      console.warn("API-Football returned errors:", data.errors);
+      throw new Error("API-Football error: " + JSON.stringify(data.errors));
+    }
+
     let fixtures = data.response || [];
 
     // Filter out finished, cancelled, or postponed matches
@@ -119,33 +125,8 @@ export async function fetchFixtures(date: string, leagueNameFilter: string): Pro
         }
       };
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("API-Football Error:", error);
-    return getMockFixtures(date, leagueNameFilter);
+    throw new Error(error.message || "Failed to fetch fixtures from API-Football");
   }
-}
-
-function getMockFixtures(date: string, league: string): APIMatch[] {
-  return [
-    {
-      id: "mock_1",
-      fixture: "Arsenal vs Chelsea",
-      homeTeam: "Arsenal",
-      awayTeam: "Chelsea",
-      league: league || "Premier League",
-      date: new Date(date),
-      status: "NS",
-      stats: {
-        GF_H: 2.1, GA_H: 0.9, GF_A: 1.5, GA_A: 1.2,
-        BTTS_rate_H: 0.6, BTTS_rate_A: 0.55,
-        League_avg_goals: 2.8, League_BTTS_rate: 0.52,
-        League_avg_shots: 10.5, League_avg_corners: 9.8, League_avg_cards: 4.2, League_avg_fouls: 22.1,
-        Form_H: 0.8, Form_A: 0.6, home_team_is_strong_at_home: true,
-        CornersFor_H: 6.2, CornersAgainst_H: 4.1, CornersFor_A: 5.1, CornersAgainst_A: 4.9,
-        CardsFor_H: 1.8, CardsAgainst_H: 2.1, CardsFor_A: 2.2, CardsAgainst_A: 1.9,
-        FoulsFor_H: 10.5, FoulsAgainst_H: 11.2, FoulsFor_A: 12.1, FoulsAgainst_A: 10.8,
-        Referee_avg_cards: 4.5, Shots_H: 14.5, Shots_A: 11.2
-      }
-    }
-  ];
 }
